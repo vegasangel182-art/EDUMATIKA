@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUMATIKA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- ================= Estrellas del fondo ================= -->
+  <div class="fondo-espacial" id="stars"></div>
+  <div class="fondo-espacial__cometa" id="comet1"></div>
+  <div class="fondo-espacial__cometa" id="comet2"></div>
+
+  <!-- ================= Pantalla de Bienvenida ================= -->
+  <div id="pantalla-bienvenida" class="pantalla pantalla--activa">
+    <div class="contenedor">
+      <div class="logo">
+        <h2 class="logo__texto">¡Bienvenido! a EDUMATIKA</h2>
+      </div>
+      <div class="mensaje-bienvenida">
+        <p class="mensaje-bienvenida__texto">
+          Selecciona tu rol para continuar
+        </p>
+      </div>
+      <!-- Tarjetas de los roles -->
+      <div class="seleccion-rol">
+        <!-- Estudiante -->
+        <div class="seleccion-rol__tarjeta" onmousedown="sonidoClic.play()" onclick="seleccionarRol('estudiante')">
+          <div class="seleccion-rol__icono">
+            <img src="assets/svg/casco.svg" alt="estudiante" />
+          </div>
+          <h3 class="seleccion-rol__titulo">Estudiante</h3>
+          <p class="seleccion-rol__descripcion">Aprende matemáticas</p>
+        </div>
+        <!-- Representante -->
+        <div class="seleccion-rol__tarjeta" onmousedown="sonidoClic.play()" onclick="seleccionarRol('representante')">
+          <div class="seleccion-rol__icono">
+            <img src="assets/svg/escudo.svg" alt="representante" />
+          </div>
+          <h3 class="seleccion-rol__titulo">Representante</h3>
+          <p class="seleccion-rol__descripcion">
+            Ver progreso del estudiante
+          </p>
+        </div>
+        <!-- Docente -->
+        <div class="seleccion-rol__tarjeta" onmousedown="sonidoClic.play()" onclick="seleccionarRol('docente')">
+          <div class="seleccion-rol__icono">
+            <img src="assets/svg/libro.svg" alt="docente" />
+          </div>
+          <h3 class="seleccion-rol__titulo">Docente</h3>
+          <p class="seleccion-rol__descripcion">Gestionar estudiantes</p>
+        </div>
+        <!-- Administrador -->
+        <div class="seleccion-rol__tarjeta" onmousedown="sonidoClic.play()" onclick="seleccionarRol('admin')">
+          <div class="seleccion-rol__icono">
+            <img src="assets/svg/admin.svg" alt="admin" />
+          </div>
+          <h3 class="seleccion-rol__titulo">Admin</h3>
+          <p class="seleccion-rol__descripcion">Gestionar profesores</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Login - Estudiante ================= -->
+  <div id="pantalla-login-estudiante" class="pantalla">
+    <div class="contenedor">
+      <div class="formulario-login">
+        <div class="formulario-login__encabezado">
+          <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+            onclick="mostrarPantalla('pantalla-bienvenida')">
+            <img src="assets/svg/back-icon.svg" alt="Regresar" />
+            <p class="TextoBTN">Regresar</p>
+          </button>
+          <div class="formulario-login__icono">
+            <img src="assets/svg/casco.svg" alt="Estudiante" />
+          </div>
+        </div>
+        <h2 class="formulario-login__titulo">Iniciar Sesión - Estudiante</h2>
+        <form id="form-login-estudiante" class="formulario-login__form">
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Usuario</label>
+            <input type="text" class="formulario-login__entrada" name="usuario" id="usuario-estudiante" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Contraseña</label>
+            <input type="password" class="formulario-login__entrada" name="contrasena" id="contrasena-estudiante"
+              required />
+          </div>
+          <div id="mensaje-error-estudiante" class="formulario-login__mensaje-error"></div>
+          <button type="submit" onmousedown="sonidoIngresar.play()" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Ingresar" />
+            <p>Ingresar</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Login - Representante ================= -->
+  <div id="pantalla-login-representante" class="pantalla">
+    <div class="contenedor">
+      <div class="formulario-login">
+        <div class="formulario-login__encabezado">
+          <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+            onclick="mostrarPantalla('pantalla-bienvenida')">
+            <img src="assets/svg/back-icon.svg" alt="Regresar" />
+            <p class="TextoBTN">Regresar</p>
+          </button>
+          <div class="formulario-login__icono">
+            <img src="assets/svg/escudo.svg" alt="Representante" />
+          </div>
+        </div>
+        <h2 class="formulario-login__titulo">
+          Iniciar Sesión - Representante
+        </h2>
+        <form id="form-login-representante" class="formulario-login__form">
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Usuario</label>
+            <input type="text" class="formulario-login__entrada" name="usuario" id="usuario-representante" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Contraseña</label>
+            <input type="password" class="formulario-login__entrada" name="contrasena" id="contrasena-representante"
+              required autocomplete="current-password" />
+          </div>
+          <div id="mensaje-error-representante" class="formulario-login__mensaje-error"></div>
+          <button type="submit" onmousedown="sonidoIngresar.play()" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Ingresar" />
+            <p>Ingresar</p>
+          </button>
+          <div class="formulario-login__enlace">
+            <a href="#" onclick="mostrarPantalla('pantalla-registro-representante'); return false;">
+              ¿No tienes cuenta? Regístrate aquí
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Registro - Representante ================= -->
+  <div id="pantalla-registro-representante" class="pantalla">
+    <div class="contenedor">
+      <div class="formulario-login">
+        <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+          onclick="mostrarPantalla('pantalla-login-representante')">
+          <img src="assets/svg/back-icon.svg" alt="Regresar" />
+          <p class="TextoBTN">Regresar</p>
+        </button>
+        <div class="formulario-login__encabezado">
+          <h2 class="formulario-login__titulo">Registro de Representante</h2>
+          <p class="formulario-login__subtitulo">
+            Complete el formulario para registrarse
+          </p>
+        </div>
+        <form id="form-registro-representante" class="formulario-login__form">
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Cédula de Identidad *</label>
+            <div class="formulario-grid__cedula">
+              <select class="formulario-login__entrada" id="reg-cedula-nacionalidad">
+                <option value="V">V</option>
+                <option value="E">E</option>
+              </select>
+              <input type="number" class="formulario-login__entrada" id="reg-cedula-numero" placeholder="12345678"
+                required />
+            </div>
+            <small>Debe estar pre-autorizada por el docente</small>
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Correo Electrónico</label>
+            <input type="email" class="formulario-login__entrada" name="email" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Teléfono</label>
+            <input type="tel" class="formulario-login__entrada" name="telefono" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Usuario *</label>
+            <input type="text" class="formulario-login__entrada" name="usuario" id="reg-usuario" required
+              autocomplete="username" />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Contraseña</label>
+            <input type="password" class="formulario-login__entrada" name="contrasena" id="reg-contrasena" required
+              autocomplete="current-password" />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__checkbox">
+              <input type="checkbox" id="checkbox-terminos" name="terminos" required />
+              <span>
+                <p>
+                  He leído y acepto los
+                  <a href="#" onclick="mostrarTerminos(event)">términos y condiciones</a>
+                </p>
+              </span>
+            </label>
+          </div>
+          <div id="mensaje-error-registro" class="formulario-login__mensaje-error"></div>
+          <button type="submit" onmousedown="sonidoClic.play()" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Registrar" />
+            <p>Registrarse</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Modal de terminos y condiciones para el representante ================= -->
+  <div id="terminos-overlay" class="overlay" style="display: none">
+    <div class="modal__contenido">
+      <span class="modal__cerrar" onclick="ocultarTerminos()">&times;</span>
+      <h2 class="modal__titulo">Términos y Condiciones de EDUMATIKA</h2>
+      <div class="modal__cuerpo">
+        <h3>1. Aceptación de los Términos</h3>
+        <p>
+          Al registrarse en EDUMATIKA, usted acepta cumplir con estos términos
+          y condiciones de uso. Si no está de acuerdo con alguno de estos
+          términos, no debe utilizar la plataforma.
+        </p>
+        <h3>2. Descripción del Servicio</h3>
+        <p>
+          EDUMATIKA es una plataforma educativa diseñada para el aprendizaje
+          de matemáticas básicas (suma, resta y multiplicación) dirigida a
+          estudiantes de educación primaria de 4to grado de la Escuela Básica
+          “José Félix Ribas”.
+        </p>
+        <h3>3. Registro y Cuentas de Usuario</h3>
+        <p>
+          Los docentes son responsables de registrar a los estudiantes y
+          autorizar a sus representantes. Los representantes deben
+          proporcionar información veraz y actualizada durante el registro.
+          Cada representante es responsable de mantener la confidencialidad de
+          las credenciales de acceso de sus representados.
+        </p>
+        <h3>4. Privacidad y Protección de Datos</h3>
+        <p>
+          Nos comprometemos a proteger la información personal de los
+          estudiantes, representantes y docentes. Los datos recopilados se
+          utilizarán únicamente para fines educativos y de seguimiento del
+          progreso académico. No compartiremos información personal con
+          terceros sin consentimiento explícito.
+        </p>
+        <h3>5. Uso Apropiado de la Plataforma</h3>
+        <p>
+          Los usuarios se comprometen a utilizar EDUMATIKA exclusivamente con
+          fines educativos. Está prohibido cualquier uso que pueda dañar,
+          deshabilitar o afectar el funcionamiento de la plataforma.
+        </p>
+        <h3>6. Responsabilidades del Representante</h3>
+        <p>
+          El representante es responsable de: gestionar las credenciales de
+          acceso del estudiante, supervisar el uso apropiado de la plataforma
+          por parte del estudiante, y restablecer contraseñas cuando sea
+          necesario.
+        </p>
+        <h3>7. Responsabilidades del Docente</h3>
+        <p>
+          El docente es responsable de: registrar correctamente la información
+          de los estudiantes, autorizar a los representantes legítimos, y
+          utilizar los datos de progreso de manera ética y profesional.
+        </p>
+        <h3>8. Propiedad Intelectual</h3>
+        <p>
+          Todo el contenido de EDUMATIKA, incluyendo diseños, ilustraciones,
+          ejercicios y código, está protegido por derechos de autor. No está
+          permitida la reproducción o distribución sin autorización.
+        </p>
+        <h3>9. Modificaciones del Servicio</h3>
+        <p>
+          Nos reservamos el derecho de modificar, suspender o discontinuar
+          cualquier aspecto de la plataforma en cualquier momento, con o sin
+          previo aviso.
+        </p>
+        <h3>10. Modificaciones de los Términos</h3>
+        <p>
+          Estos términos y condiciones pueden ser actualizados periódicamente.
+        </p>
+        <h3>11. Contacto</h3>
+        <p>
+          Para preguntas o inquietudes sobre estos términos, puede
+          contactarnos a través de los canales oficiales de la Escuela Básica
+          “José Félix Ribas”.
+        </p>
+      </div>
+      <button class="boton boton--primario" onclick="ocultarTerminos()">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Login - Docente ================= -->
+  <div id="pantalla-login-docente" class="pantalla">
+    <div class="contenedor">
+      <div class="formulario-login">
+        <div class="formulario-login__encabezado">
+          <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+            onclick="mostrarPantalla('pantalla-bienvenida')">
+            <img src="assets/svg/back-icon.svg" alt="Regresar" />
+            <p class="TextoBTN">Regresar</p>
+          </button>
+          <div class="formulario-login__icono">
+            <img src="assets/svg/libro.svg" alt="Docente" />
+          </div>
+        </div>
+        <h2 class="formulario-login__titulo">Iniciar Sesión - Docente</h2>
+        <form id="form-login-docente" class="formulario-login__form">
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Usuario</label>
+            <input type="text" class="formulario-login__entrada" name="usuario" id="usuario-docente" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Contraseña</label>
+            <input type="password" class="formulario-login__entrada" name="contrasena" id="contrasena-docente" required
+              autocomplete="current-password" />
+          </div>
+          <div id="mensaje-error-docente" class="formulario-login__mensaje-error"></div>
+          <button type="submit" onmousedown="sonidoIngresar.play()" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Ingresar" />
+            <p>Ingresar</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Login - Admin ================= -->
+  <div id="pantalla-login-admin" class="pantalla">
+    <div class="contenedor">
+      <div class="formulario-login">
+        <div class="formulario-login__encabezado">
+          <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+            onclick="mostrarPantalla('pantalla-bienvenida')">
+            <img src="assets/svg/back-icon.svg" alt="Regresar" />
+            <p class="TextoBTN">Regresar</p>
+          </button>
+          <div class="formulario-login__icono">
+            <img src="assets/svg/admin.svg" alt="Admin" />
+          </div>
+        </div>
+        <h2 class="formulario-login__titulo">Iniciar Sesión - Admin</h2>
+        <form id="form-login-admin" class="formulario-login__form" onsubmit="manejarLoginAdmin(event)">
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Usuario</label>
+            <input type="text" class="formulario-login__entrada" name="usuario" id="usuario-admin" required />
+          </div>
+          <div class="formulario-login__campo">
+            <label class="formulario-login__etiqueta">Contraseña</label>
+            <input type="password" class="formulario-login__entrada" name="contrasena" id="contrasena-admin" required
+              autocomplete="current-password" />
+          </div>
+          <div id="mensaje-error-admin" class="formulario-login__mensaje-error"></div>
+          <button type="submit" onmousedown="sonidoIngresar.play()" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Ingresar" />
+            <p>Ingresar</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla del Panel de Administrador ================= -->
+  <div id="pantalla-admin" class="pantalla">
+    <div class="contenedor">
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()" onclick="manejarLogout()">
+          <img src="assets/svg/back-icon.svg" alt="Salir" />
+          <p class="TextoBTN">Salir</p>
+        </button>
+        <h2 class="encabezado__titulo">Panel de Administración</h2>
+        <div class="espaciador-encabezado"></div>
+      </div>
+
+      <div class="layout-docente">
+        <!-- Columna Izquierda: Formulario Crear Docente -->
+        <div class="columna-formulario">
+          <div class="tarjeta-formulario">
+            <h3 class="tarjeta-formulario__titulo">Registrar Nuevo Docente</h3>
+            <form id="form-registro-docente" onsubmit="manejarRegistroDocente(event)">
+              <div class="formulario-login__campo">
+                <label class="formulario-login__etiqueta">Nombre Completo</label>
+                <input type="text" class="formulario-login__entrada" id="reg-doc-nombre" required />
+              </div>
+              <div class="formulario-login__campo">
+                <label class="formulario-login__etiqueta">Usuario</label>
+                <input type="text" class="formulario-login__entrada" id="reg-doc-usuario" required />
+              </div>
+              <div class="formulario-login__campo">
+                <label class="formulario-login__etiqueta">Contraseña</label>
+                <input type="password" class="formulario-login__entrada" id="reg-doc-contrasena" required />
+              </div>
+              <div id="contenedor-asignaciones">
+                <div class="formulario-grid__doble asignacion-row">
+                  <div class="formulario-login__campo">
+                    <label class="formulario-login__etiqueta">Grado</label>
+                    <select class="formulario-login__entrada selector-grado" required>
+                      <option value="">Sel...</option>
+                      <option value="1">1ro</option>
+                      <option value="2">2do</option>
+                      <option value="3">3er</option>
+                      <option value="4">4to</option>
+                      <option value="5">5to</option>
+                      <option value="6">6to</option>
+                    </select>
+                  </div>
+                  <div class="formulario-login__campo">
+                    <label class="formulario-login__etiqueta">Sección</label>
+                    <select class="formulario-login__entrada selector-seccion" required>
+                      <option value="">Sel...</option>
+                      <option value="A">A</option>
+                      <option value="B">B</option>
+                      <option value="C">C</option>
+                      <option value="D">D</option>
+                      <option value="E">E</option>
+                      <option value="U">U</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="opciones">
+                <button type="button" class="boton boton--acciones ancho-completo" onclick="agregarFilaAsignacion()"
+                  style="margin-bottom: 20px;">
+                  <img src="assets/svg/plus.svg" alt="Agregar">
+                  Agregar otra sección
+                </button>
+
+                <div class="formulario-grid__boton-contenedor">
+                  <button type="submit" class="boton boton--primario ancho-completo">
+                    <img src="assets/svg/check.svg" alt="Registrar" />
+                    <p>Registrar Docente</p>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Lista de Docentes -->
+        <div class="columna-lista">
+          <h3 class="titulo-seccion">Lista de Docentes</h3>
+          <div id="lista-docentes" class="lista-estudiantes">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Template para Tarjeta de Docente -->
+  <template id="template-tarjeta-docente">
+    <div class="lista-estudiantes__tarjeta">
+      <div class="lista-estudiantes__avatar">
+        <img src="assets/svg/libro.svg" alt="Docente">
+      </div>
+      <div class="lista-estudiantes__detalles">
+        <h4 class="lista-estudiantes__nombre"></h4>
+        <p class="lista-estudiantes__grado"></p>
+      </div>
+      <div class="lista-estudiantes__acciones">
+        <button class="boton-editar-docente boton-pequeno" title="Editar">
+          <img src="assets/svg/edit.svg" alt="Editar" style="width: 16px; height: 16px;">
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template para Fila de Asignacion (Admin) -->
+  <template id="template-fila-asignacion">
+    <div class="formulario-grid__doble asignacion-row">
+      <div class="formulario-login__campo">
+        <label class="formulario-login__etiqueta">Grado</label>
+        <select class="formulario-login__entrada selector-grado" required>
+          <option value="">Sel...</option>
+          <option value="1">1ro</option>
+          <option value="2">2do</option>
+          <option value="3">3er</option>
+          <option value="4">4to</option>
+          <option value="5">5to</option>
+          <option value="6">6to</option>
+        </select>
+      </div>
+      <div class="formulario-login__campo">
+        <label class="formulario-login__etiqueta">Sección</label>
+        <select class="formulario-login__entrada selector-seccion" required>
+          <option value="">Sel...</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="U">U</option>
+        </select>
+      </div>
+      <button type="button" class="boton-eliminar-fila" title="Eliminar asignación">
+        <img src="assets/svg/trash.svg" alt="Eliminar" style="width: 14px; height: 14px;">
+      </button>
+    </div>
+  </template>
+
+  <!-- ================= Pantalla de Misiones (las operaciones) ================= -->
+  <div id="pantalla-misiones" class="pantalla">
+    <div class="contenedor">
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()" onclick="manejarLogout()">
+          <img src="assets/svg/home-icon.svg" alt="" />
+          <p class="TextoBTN">Volver al Inicio</p>
+        </button>
+        <h2 class="encabezado__titulo">Elige una Misión</h2>
+        <button class="boton boton--secundario" onmousedown="sonidoClic.play()"
+          onclick="mostrarPantalla('progress-screen')" title="Ver progreso">
+          <img src="assets/svg/progreso-icon.svg" alt="" />
+          <p class="TextoBTN">Ver Progreso</p>
+        </button>
+      </div>
+      <div class="ilustracion-operaciones">
+        <img src="assets/svg/missioncontrol.svg" alt="control de la misión" class="ilustracion-operaciones__imagen" />
+      </div>
+      <div class="grid-operaciones">
+        <div class="tarjeta-operacion" onmousedown="sonidoSeleccionar.play()" onclick="iniciarActividad('suma')">
+          <div class="tarjeta-operacion__icono">
+            <img src="assets/svg/+.svg" alt="suma" />
+          </div>
+          <h3 class="tarjeta-operacion__titulo">Suma</h3>
+          <p class="tarjeta-operacion__descripcion">Aprende a sumar</p>
+          <div class="tarjeta-operacion__nivel" id="nivel-suma">Nivel 1</div>
+        </div>
+        <div class="tarjeta-operacion" onmousedown="sonidoSeleccionar.play()" onclick="iniciarActividad('resta')">
+          <div class="tarjeta-operacion__icono">
+            <img src="assets/svg/-.svg" alt="resta" />
+          </div>
+          <h3 class="tarjeta-operacion__titulo">Resta</h3>
+          <p class="tarjeta-operacion__descripcion">Aprende a restar</p>
+          <div class="tarjeta-operacion__nivel" id="nivel-resta">Nivel 1</div>
+        </div>
+        <div class="tarjeta-operacion" onmousedown="sonidoSeleccionar.play()"
+          onclick="iniciarActividad('multiplicacion')">
+          <div class="tarjeta-operacion__icono">
+            <img src="assets/svg/x.svg" alt="multiplicación" />
+          </div>
+          <h3 class="tarjeta-operacion__titulo">Multiplicación</h3>
+          <p class="tarjeta-operacion__descripcion">Aprende a multiplicar</p>
+          <div class="tarjeta-operacion__nivel" id="nivel-multiplicacion">
+            Nivel 1
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Actividad ================= -->
+  <div id="pantalla-actividad" class="pantalla">
+    <div class="contenedor">
+      <form id="answer-form">
+        <div class="encabezado-actividad">
+          <button type="button" class="boton--volver" onmousedown="sonidoAtras.play()"
+            onclick="mostrarPantalla('pantalla-misiones')">
+            <img src="assets/svg/back-icon.svg" alt="Regresar" />
+            <p class="TextoBTN">Regresar</p>
+          </button>
+          <div class="encabezado-actividad__info">
+            <span id="tipo-actividad" class="encabezado-actividad__tipo">Suma</span>
+            <span class="encabezado-actividad__puntuacion">Puntos: <span id="puntuacion-actual">0</span></span>
+          </div>
+        </div>
+        <div class="contenedor-ejercicio">
+          <div id="visual-elements" class="contenedor-ejercicio__elementos-visuales"></div>
+          <div class="pregunta-ejercicio">
+            <span id="num1" class="pregunta-ejercicio__numero">3</span>
+            <span id="operador" class="pregunta-ejercicio__operador">+</span>
+            <span id="num2" class="pregunta-ejercicio__numero">2</span>
+            <span class="pregunta-ejercicio__igual">=</span>
+            <input type="number" id="entrada-respuesta" class="pregunta-ejercicio__entrada" placeholder="¿?"
+              autofocus />
+          </div>
+          <button type="submit" class="boton boton--primario" onmousedown="sonidoClic.play()">
+            <img src="assets/svg/check.svg" alt="check" />
+            <p>Verificar</p>
+          </button>
+        </div>
+        <div id="feedback" class="retroalimentacion"></div>
+        <div class="barra-progreso">
+          <div class="barra-progreso__relleno" id="progreso-ejercicio"></div>
+        </div>
+        <p class="barra-progreso__texto">
+          Ejercicio <span id="numero-ejercicio">1</span> de 5
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Resultados ================= -->
+  <div id="pantalla-resultados" class="pantalla">
+    <div class="contenedor">
+      <div class="contenedor-resultados">
+        <div class="encabezado-resultados">
+          <button class="boton--volver" onmousedown="sonidoAtras.play()" onclick="mostrarPantalla('pantalla-misiones')">
+            <img src="assets/svg/telescopio.svg" alt="Menu" />
+            <p class="TextoBTN">Ver Misiones</p>
+          </button>
+          <button class="boton--volver" onclick="siguienteActividad()">
+            <img src="assets/svg/matematica.svg" alt="matematica" />
+            <p class="TextoBTN">Siguiente Misión</p>
+          </button>
+        </div>
+        <div class="contenedor-resultados__icono">
+          <img src="assets/svg/NaveNivel.svg" alt="Nave Espacial" />
+        </div>
+        <h2 class="contenedor-resultados__titulo">¡Misión Completada!</h2>
+        <div class="estadisticas-resultados">
+          <div class="estadisticas-resultados__tarjeta">
+            <div class="estadisticas-resultados__icono">
+              <img src="assets/svg/estrella.svg" alt="Estrella" />
+            </div>
+            <div class="estadisticas-resultados__valor" id="puntos-finales">
+              0
+            </div>
+            <div class="estadisticas-resultados__etiqueta">Puntos</div>
+          </div>
+          <div class="estadisticas-resultados__tarjeta">
+            <div class="estadisticas-resultados__icono">
+              <img src="assets/svg/correcto.svg" alt="Correcto" />
+            </div>
+            <div class="estadisticas-resultados__valor" id="respuestas-correctas">
+              0
+            </div>
+            <div class="estadisticas-resultados__etiqueta">Correctas</div>
+          </div>
+          <div class="estadisticas-resultados__tarjeta">
+            <div class="estadisticas-resultados__icono">
+              <img src="assets/svg/reloj.svg" alt="Reloj" />
+            </div>
+            <div class="estadisticas-resultados__valor" id="tiempo-ejercicio">
+              0
+            </div>
+            <div class="estadisticas-resultados__etiqueta">Segundos</div>
+          </div>
+        </div>
+        <div id="mensaje-resultados" class="contenedor-resultados__mensaje"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Progreso ================= -->
+  <div id="progress-screen" class="pantalla">
+    <div class="contenedor">
+      <!-- Header de Progreso -->
+      <div class="encabezado">
+        <button class="boton--volver" onmousedown="sonidoAtras.play()" onclick="mostrarPantalla('pantalla-misiones')">
+          <img src="assets/svg/back-icon.svg" alt="Regresar" />
+          <p class="TextoBTN">Regresar</p>
+        </button>
+        <!-- Titulo de Pantalla/Vista -->
+        <h2 class="encabezado__titulo">Tu Progreso</h2>
+      </div>
+      <!-- Informacion del Estudiante -->
+      <div id="progreso-info-estudiante" class="info-estudiante" style="display: none">
+        <!-- Lista de estudiantes del representante -->
+        <div id="progreso-students-list" class="rep-students-list" aria-label="Lista de estudiantes"></div>
+
+        <div class="info-estudiante__avatar">
+          <img id="progreso-foto-estudiante" src="assets/svg/perfil.svg" alt="foto estudiante" />
+        </div>
+        <h3 class="info-estudiante__nombre" id="progreso-nombre-estudiante"></h3>
+      </div>
+      <!-- Tarjetas de los logros -->
+      <div class="tarjetas-progreso">
+        <!-- Tarjeta de progreso de Suma -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/+.svg" alt="Suma" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Suma</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Ejercicios completados:
+              <strong id="progreso-suma-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación: <strong id="progreso-suma-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="progreso-suma-estrellas">
+              <!-- Estrellas generadas dinamicamente -->
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+        <!-- Tarjeta de Progreso de Resta -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/-.svg" alt="Resta" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Resta</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Ejercicios completados:
+              <strong id="progreso-resta-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación: <strong id="progreso-resta-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="progreso-resta-estrellas">
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+        <!-- Tarjeta de Progreso de Multiplicación -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/x.svg" alt="Multiplicación" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Multiplicación</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Ejercicios completados:
+              <strong id="progreso-multiplicacion-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación:
+              <strong id="progreso-multiplicacion-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="progreso-multiplicacion-estrellas">
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="progreso-general-estudiante" class="progreso-general">
+        <h3 class="progreso-general__titulo">Progreso General</h3>
+        <p class="progreso-general__texto"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Gestion de Estudiante (Representante) ================= -->
+  <div id="pantalla-gestion-estudiante-representante" class="pantalla">
+    <div class="contenedor">
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()"
+          onclick="mostrarPantalla('pantalla-representante')">
+          <img src="assets/svg/back-icon.svg" alt="Volver" />
+          <p class="TextoBTN">Volver</p>
+        </button>
+        <h2 class="encabezado__titulo">Perfil del Estudiante</h2>
+      </div>
+
+      <div class="perfil-estudiante">
+        <div class="perfil-estudiante__foto-contenedor">
+          <img id="gestion-foto-estudiante" src="assets/svg/perfil.svg" alt="Foto del estudiante"
+            class="perfil-estudiante__foto" />
+
+          <button class="boton-flotante-camara" onclick="document.getElementById('input-foto-estudiante').click()">
+            <img src="assets/svg/camara.svg" alt="Cambiar foto" />
+          </button>
+
+          <input type="file" id="input-foto-estudiante" accept="image/*" style="display: none"
+            onchange="subirFotoEstudiante()" />
+        </div>
+
+        <div class="perfil-estudiante__info-card">
+          <h3 class="perfil-estudiante__seccion-titulo">
+            Información Personal
+          </h3>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Nombre Completo:</span>
+            <span class="valor" id="gestion-nombre-estudiante">Buscando...</span>
+          </div>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Grado:</span>
+            <span class="valor" id="gestion-grado-estudiante">...</span>
+          </div>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Edad:</span>
+            <span class="valor" id="gestion-edad-estudiante">...</span>
+          </div>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Sexo:</span>
+            <span class="valor" id="gestion-sexo-estudiante">...</span>
+          </div>
+        </div>
+
+        <div class="perfil-estudiante__info-card">
+          <h3 class="perfil-estudiante__seccion-titulo">
+            Credenciales del Estudiante
+          </h3>
+          <div class="alerta-info">
+            <p>
+              Estas son las credenciales para que el estudiante inicie sesión.
+            </p>
+          </div>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Usuario:</span>
+            <span class="valor valor--resaltado" id="gestion-usuario-estudiante">...</span>
+          </div>
+          <div class="perfil-estudiante__dato">
+            <span class="etiqueta">Contraseña:</span>
+            <div class="password-toggle-container">
+              <input type="password" id="gestion-password-estudiante" class="valor-input-pw" value="********"
+                readonly />
+              <button class="btn-ojo" type="button" id="btn-toggle-password"
+                onclick="togglePasswordVisibility('gestion-password-estudiante')">
+                <img src="assets/svg/eye.svg" alt="Mostrar contraseña" id="icon-toggle-password" />
+              </button>
+            </div>
+          </div>
+          <div class="perfil-estudiante__acciones">
+            <button class="boton boton--usuarios" onclick="mostrarModalEditarPassword()">
+              <p>Editar Contraseña</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla del Panel del Representante ================= -->
+  <div id="pantalla-representante" class="pantalla">
+    <div class="contenedor">
+      <!-- Header del Panel del docente -->
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()" onclick="manejarLogout()">
+          <img src="assets/svg/home-icon.svg" alt="" />
+          <p class="TextoBTN">Volver al Inicio</p>
+        </button>
+        <h2 class="encabezado__titulo">Panel de Representante</h2>
+      </div>
+      <!-- Acciones del Panel del representante -->
+      <div class="acciones-representante">
+        <button class="boton boton--acciones" onclick="abrirGestionEstudiantes()">
+          <img src="assets/svg/users.svg" alt="gestion" />
+          <p class="TextoBTN">Gestionar Registro de Estudiantes</p>
+        </button>
+      </div>
+      <!-- Lista de avatares de los estudiantes del representante -->
+      <div class="rep-instruction" id="rep-instruction">
+        Seleccione un estudiante para ver su progreso
+      </div>
+      <div id="rep-students-list" class="rep-students-list" aria-label="Lista de estudiantes"></div>
+
+      <div id="rep-info-estudiante" class="info-estudiante" style="display: none">
+        <div class="info-estudiante__avatar">
+          <img id="rep-dashboard-foto-estudiante" src="assets/svg/perfil.svg" alt="foto estudiante" />
+        </div>
+        <h3 class="info-estudiante__nombre" id="rep-dashboard-nombre-estudiante"></h3>
+        <p class="info-estudiante__grado" id="rep-dashboard-grado-estudiante"></p>
+
+        <button id="btn-cambiar-estudiante" class="btn-cambiar-perfil" onclick="deseleccionarEstudianteRep()"
+          style="display: none">
+          <img src="assets/svg/users.svg" alt="icon" style="height: 16px; margin-right: 6px" />
+          Cambiar Estudiante
+        </button>
+      </div>
+
+      <!-- Tarjetas de Progreso del Estudiante -->
+      <div id="rep-tarjetas-progreso" class="tarjetas-progreso" style="display: none">
+        <!-- Tarjetas de Suma -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/+.svg" alt="Suma" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Suma</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Nivel actual: <strong id="rep-progreso-suma-nivel">1</strong>
+            </p>
+            <p>
+              Ejercicios completados:
+              <strong id="rep-progreso-suma-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación:
+              <strong id="rep-progreso-suma-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="rep-progreso-suma-estrellas">
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+        <!-- Tarjeta de Resta -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/-.svg" alt="Resta" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Resta</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Nivel actual: <strong id="rep-progreso-resta-nivel">1</strong>
+            </p>
+            <p>
+              Ejercicios completados:
+              <strong id="rep-progreso-resta-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación:
+              <strong id="rep-progreso-resta-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="rep-progreso-resta-estrellas">
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+        <!-- Tarjeta de Multiplicacion -->
+        <div class="tarjetas-progreso__tarjeta">
+          <div class="tarjetas-progreso__encabezado">
+            <span class="tarjetas-progreso__icono">
+              <img src="assets/svg/x.svg" alt="Multiplicación" />
+            </span>
+            <h3 class="tarjetas-progreso__titulo">Multiplicación</h3>
+          </div>
+          <div class="tarjetas-progreso__detalles">
+            <p>
+              Nivel actual:
+              <strong id="rep-progreso-multiplicacion-nivel">1</strong>
+            </p>
+            <p>
+              Ejercicios completados:
+              <strong id="rep-progreso-multiplicacion-ejercicios">0</strong>
+            </p>
+            <p>
+              Mejor puntuación:
+              <strong id="rep-progreso-multiplicacion-puntaje">0</strong>
+            </p>
+            <div class="estrellas" id="rep-progreso-multiplicacion-estrellas">
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+              <span class="estrellas__estrella"><img src="assets/svg/estrella.svg" alt="Estrella" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta del Progreso General del Estudiante -->
+      <div id="rep-progreso-general" class="progreso-general" style="display: none">
+        <h3 class="progreso-general__titulo">Progreso General</h3>
+        <p class="progreso-general__texto">Aún no hay progreso registrado.</p>
+        <p class="progreso-general__ultima-actividad" id="rep-ultima-actividad">
+          Aún no hay actividad registrada.
+        </p>
+      </div>
+      <!-- Tarjeta de Observaciones -->
+      <div id="rep-recomendaciones" class="recomendaciones-representante">
+        <div class="recomendaciones-representante__titulo">
+          <img src="assets/svg/bombillo.svg" alt="bombillo" />
+          <spam>Observaciones del Docente</spam>
+        </div>
+        <ul class="recomendaciones-representante__lista" id="lista-observaciones-representante">
+          <li class="recomendaciones-representante__item">
+            Cargando observaciones...
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= Pantalla del Panel de Docente ================= -->
+  <div id="pantalla-docente" class="pantalla">
+    <div class="contenedor">
+      <div class="encabezado">
+        <button class="boton boton--secundario" onclick="manejarLogout()">
+          <img src="assets/svg/home-icon.svg" alt="Volver al Inicio" />
+          <p class="TextoBTN">Volver al Inicio</p>
+        </button>
+        <h2 class="encabezado__titulo">Panel de Docente</h2>
+      </div>
+      <div class="acciones-docente">
+        <div class="acciones-docente__grupo">
+          <!-- Botones con funcionalidad -->
+          <button id="btn-por-revisar" class="boton boton--acciones"
+            onclick="mostrarSeccionDocente('por-revisar', this)">
+            <img src="assets/svg/buscar.svg" alt="Por revisar" />
+            <p>Por revisar</p>
+          </button>
+          <button id="btn-revisados" class="boton boton--acciones" onclick="mostrarSeccionDocente('revisados', this)">
+            <img src="assets/svg/stars.svg" alt="Revisados" />
+            <p>Revisados</p>
+          </button>
+        </div>
+        <button class="boton boton--acciones" onclick="mostrarPantalla('pantalla-ver-estudiantes')">
+          <img src="assets/svg/users.svg" alt="Ver estudiantes" />
+          <p>Ver estudiantes</p>
+        </button>
+        <button class="boton boton--acciones" onclick="mostrarPantalla('pantalla-registrar-estudiante')">
+          <img src="assets/svg/plus.svg" alt="Registrar estudiante" />
+          <p>Registrar Estudiante</p>
+        </button>
+      </div>
+      <!-- Contenedor de los estudiantes -->
+      <div class="lista-estudiantes">
+        <div id="seccion-por-revisar">
+          <div class="mensaje-vacio" id="msg-no-estudiantes" style="display: none">
+            No hay estudiantes recientes.
+          </div>
+        </div>
+        <!-- Seccion de revisados -->
+        <div id="seccion-revisados" style="display: none">
+          <div class="mensaje-vacio">
+            <h3>No hay estudiantes revisados</h3>
+            <p>
+              Cuando envies las observaciones y marques a un estudiante como
+              revisado, aparecerán aquí.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Ver Todos los Estudiantes ================= -->
+  <div id="pantalla-ver-estudiantes" class="pantalla" style="display: none">
+    <div class="contenedor">
+      <!-- Header de la pantalla ver lista de estudiantes-->
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()"
+          onclick="mostrarPantalla('pantalla-docente')">
+          <img src="assets/svg/back-icon.svg" alt="Regresar" />
+          <p class="TextoBTN">Regresar al Panel</p>
+        </button>
+        <h2 class="encabezado__titulo">Lista General de Estudiantes</h2>
+      </div>
+      <!-- Tabla de estudiantes -->
+      <div class="tabla-estudiantes">
+        <div class="tabla-estudiantes__encabezado">
+          <div class="tabla-estudiantes__celda">Estudiante</div>
+          <div class="tabla-estudiantes__celda">Edad/Sexo</div>
+          <div class="tabla-estudiantes__celda">Representante</div>
+          <div class="tabla-estudiantes__celda">Estado</div>
+          <div class="tabla-estudiantes__celda">Acciones</div>
+        </div>
+        <div id="lista-estudiantes-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de Detalles del Estudiante (Docente) ================= -->
+  <div id="pantalla-detalles-estudiante" class="pantalla" style="display: none">
+    <div class="contenedor">
+      <div class="encabezado">
+        <button class="boton boton--secundario" onmousedown="sonidoAtras.play()"
+          onclick="mostrarPantalla('pantalla-docente')">
+          <img src="assets/svg/back-icon.svg" alt="Regresar" />
+          <p class="TextoBTN">Volver</p>
+        </button>
+        <h2 class="encabezado__titulo">Detalles del Estudiante</h2>
+      </div>
+
+      <div class="info-estudiante">
+        <div class="info-estudiante__avatar">
+          <img id="detalles-estudiante-foto" src="assets/svg/perfil.svg" alt="foto estudiante" />
+        </div>
+        <h3 class="info-estudiante__nombre text-white-force" id="detalles-estudiante-nombre">
+          Cargando...
+        </h3>
+        <p class="info-estudiante__grado text-white-force" id="detalles-estudiante-grado"></p>
+      </div>
+
+      <div id="detalles-estudiante-body" class="detalles-estudiante-body"
+        style="max-height: 600px; overflow-y: auto; margin-top: 12px"></div>
+    </div>
+  </div>
+
+  <!-- ================= Pantalla de registro de estudiante desde la vista del Docente ================= -->
+  <div id="pantalla-registrar-estudiante" class="pantalla" style="display: none">
+    <div class="contenedor">
+      <div class="formulario-login" style="max-width: 800px">
+        <button class="boton--volver__formulario" onmousedown="sonidoAtras.play()"
+          onclick="mostrarPantalla('pantalla-docente')">
+          <img src="assets/svg/back-icon.svg" alt="Regresar" />
+          <p class="TextoBTN">Regresar al Panel</p>
+        </button>
+        <div class="formulario-login__encabezado">
+          <h2 class="formulario-login__titulo">Registrar Nuevo Estudiante</h2>
+          <p class="formulario-login__subtitulo">Complete todos los campos</p>
+        </div>
+        <form id="form-registro-estudiante" class="formulario-login__form formulario-grid">
+          <!-- Columna Izquierda -->
+          <div class="formulario-grid__columna">
+            <h3 class="formulario-grid__titulo-columna">
+              Datos del Estudiante
+            </h3>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Nombres</label>
+              <input type="text" class="formulario-login__entrada" id="reg-est-nombres" required />
+            </div>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Apellidos</label>
+              <input type="text" class="formulario-login__entrada" id="reg-est-apellidos" required />
+            </div>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Edad</label>
+              <input type="number" class="formulario-login__entrada" id="reg-est-edad" required />
+            </div>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Sexo</label>
+              <select class="formulario-login__entrada" id="reg-est-sexo" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+              </select>
+            </div>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Grado y Sección</label>
+              <select class="formulario-login__entrada" id="reg-est-grado-seccion" required>
+                <option value="" disabled selected>Cargando asignaciones...</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Columna Derecha -->
+          <div class="formulario-grid__columna">
+            <h3 class="formulario-grid__titulo-columna">
+              Datos del Representante
+            </h3>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Cédula del Representante</label>
+              <div class="formulario-grid__cedula">
+                <select class="formulario-login__entrada" id="reg-est-cedula-nacionalidad">
+                  <option value="V">V</option>
+                  <option value="E">E</option>
+                </select>
+                <input type="number" class="formulario-login__entrada" id="reg-est-cedula-numero" placeholder="12345678"
+                  required />
+              </div>
+            </div>
+            <div class="formulario-login__campo">
+              <label class="formulario-login__etiqueta">Nombre del Representante</label>
+              <input type="text" class="formulario-login__entrada" id="reg-est-nombre-rep" required />
+            </div>
+          </div>
+
+          <!-- Boton de envio -->
+          <div class="formulario-grid__boton-contenedor">
+            <button type="submit" onmousedown="sonidoClic.play()" class="boton boton--primario">
+              <img src="assets/svg/plus.svg" alt="Registrar" />
+              <p>Registrar Estudiante</p>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ================= Modal de Notificaciones ================= -->
+  <template id="template-estudiante-row">
+    <div class="tabla-estudiantes__fila">
+      <div class="tabla-estudiantes__celda">
+        <p class="tabla-estudiantes__nombre"></p>
+        <small class="tabla-estudiantes__grado"></small>
+      </div>
+      <div class="tabla-estudiantes__celda">
+        <p class="tabla-estudiantes__edad"></p>
+        <small class="tabla-estudiantes__sexo"></small>
+      </div>
+      <div class="tabla-estudiantes__celda">
+        <p class="tabla-estudiantes__rep-nombre"></p>
+        <small class="tabla-estudiantes__rep-cedula"></small>
+      </div>
+      <div class="tabla-estudiantes__celda">
+        <span class="estado estado--activo">Activo</span>
+      </div>
+      <div class="tabla-estudiantes__celda">
+        <button class="boton-tabla btn-editar">Editar</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="template-ejercicio-row">
+    <div class="ejercicio-row">
+      <span class="ejercicio-estado"></span>
+      <span class="ejercicio-text"></span>
+      <small class="ejercicio-intentos"></small>
+    </div>
+  </template>
+
+  <template id="template-sesion-detalle">
+    <div class="sesion-card">
+      <div class="sesion-header">
+        <strong class="sesion-operacion"></strong>
+        <span class="sesion-fecha"></span>
+      </div>
+      <div class="sesion-stats">
+        <div class="sesion-stat-item">
+
+          <small>Tiempo:</small> <strong class="sesion-tiempo"></strong>
+        </div>
+        <div class="sesion-stat-item">
+          <small>Puntos:</small> <strong class="sesion-puntos"></strong>
+        </div>
+        <div class="sesion-stat-item">
+          <small>Aciertos:</small> <strong class="sesion-aciertos"></strong>
+        </div>
+      </div>
+      <details class="sesion-detalles">
+        <summary class="sesion-detalles-summary">Ver ejercicios</summary>
+        <div class="sesion-ejercicios"></div>
+      </details>
+      <div class="sesion-observaciones">
+        <textarea class="sesion-textarea" placeholder="Escribe observaciones..."></textarea>
+        <button type="button" class="boton boton--primario sesion-guardar">
+          Enviar
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <template id="template-observacion-item">
+    <li class="recomendaciones-representante__item">
+      <strong class="observacion-titulo"></strong>
+      <span class="observacion-fecha"></span><br />
+      <span class="observacion-text"></span>
+    </li>
+  </template>
+
+  <template id="template-estudiante-card">
+    <div class="lista-estudiantes__tarjeta">
+      <div class="lista-estudiantes__avatar">
+        <img class="card-foto" src="assets/svg/perfil.svg" alt="Avatar" />
+      </div>
+      <div class="lista-estudiantes__detalles">
+        <h4 class="lista-estudiantes__nombre"></h4>
+        <p class="lista-estudiantes__grado"></p>
+      </div>
+      <button class="boton boton--usuarios card-ver-detalles">
+        <p>Ver detalles</p>
+      </button>
+    </div>
+  </template>
+
+  <template id="template-estrella">
+    <span class="estrellas__estrella estrellas__estrella--llena"><img src="assets/svg/estrella.svg"
+        alt="Estrella" /></span>
+  </template>
+
+  <div id="notificacion-overlay" class="overlay" style="display: none">
+    <div class="modal__contenido">
+      <span class="modal__cerrar" id="btn-cerrar-notificacion">&times;</span>
+      <div class="modal__icono-error">
+        <img src="assets/svg/notificacion.svg" alt="Notificación" onerror="this.src='assets/svg/escudo.svg'" />
+      </div>
+      <h2 class="modal__titulo" id="notificacion-titulo">Título</h2>
+      <p class="modal__mensaje" id="notificacion-mensaje">Mensaje</p>
+      <button class="boton boton--primario" onclick="ocultarNotificacion()">
+        Aceptar
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= Modal de Editar Contraseña ================= -->
+  <div id="modal-editar-password" class="overlay" style="display: none">
+    <div class="modal__contenido">
+      <span class="modal__cerrar" onclick="ocultarModalEditarPassword()">&times;</span>
+      <h2 class="modal__titulo">Editar Contraseña del Estudiante</h2>
+      <form id="form-editar-password" class="formulario-modal">
+        <div class="formulario-login__campo">
+          <label class="formulario-login__etiqueta">Nueva Contraseña</label>
+          <input type="password" class="formulario-login__entrada" id="nueva-password" placeholder="Mínimo 6 caracteres"
+            required />
+        </div>
+        <div class="formulario-login__campo">
+          <label class="formulario-login__etiqueta">Confirmar Contraseña</label>
+          <input type="password" class="formulario-login__entrada" id="confirmar-password"
+            placeholder="Repita la contraseña" required />
+        </div>
+        <div id="mensaje-error-password" class="formulario-login__mensaje-error"></div>
+        <div class="modal__botones">
+          <button type="button" class="boton boton--secundario" onclick="ocultarModalEditarPassword()">
+            Cancelar
+          </button>
+          <button type="submit" class="boton boton--primario">
+            <img src="assets/svg/check.svg" alt="Guardar" />
+            <p>Guardar</p>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= Scripts ================= -->
+  <script src="app.js"></script>
+</body>
+
+</html>
