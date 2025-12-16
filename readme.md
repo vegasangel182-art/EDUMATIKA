@@ -56,9 +56,10 @@ Pasos a seguir para la instalación y ejecución del proyecto:
 3.  **Configurar variables de entorno (.env)**:
     Crear un archivo llamado `.env` en la raíz y pegar el siguiente contenido:
     MONGO_URI=mongodb://localhost:27017/edumatika
+    
     JWT_SECRET=mi_clave_secreta_escolar
 
-4.  **Instalar MongoDB** (Si no está instalado):
+5.  **Instalar MongoDB** (Si no está instalado):
 
     Pasos para instalar y preparar MongoDB Community para el proyecto EDUMATIKA:
 
@@ -74,16 +75,16 @@ Pasos a seguir para la instalación y ejecución del proyecto:
 
     Al finalizar, al ejecutar el comando `mongod` en la consola, el servidor debería iniciar correctamente.
 
-5.  **Iniciar la Base de Datos**:
+6.  **Iniciar la Base de Datos**:
     Asegurarse de que MongoDB esté en ejecución. Si se instaló manualmente, abrir una terminal y ejecutar:
     mongod
 
-6.  **Iniciar el proyecto**:
+7.  **Iniciar el proyecto**:
     En la terminal del proyecto ejecutar:
     npm run dev
     Se mostrará un mensaje indicando que el servidor está listo.
 
-7.  **Acceder a la página**:
+8.  **Acceder a la página**:
     Abrir el navegador y dirigirse a: `http://localhost:5000`
 
 ---
